@@ -1,31 +1,26 @@
 import React from 'react';
+import {useDispatch, useSelector} from "react-redux";
+import {updateInput} from "../redux/actions";
+import {getWeatherAction} from "../redux/asyncActions";
 
-class Form extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {city: ''}
+const Form = () => {
+    const dispatch = useDispatch();
+    const inputValue = useSelector(state => state.inputValue);
+
+    const handleChangeInput = e => {
+        const newValue = e.target.value;
+        dispatch(updateInput(newValue));
     }
 
-    handleChangeInput = e => {
-        this.setState({city: e.target.value});
-    }
-
-    handleClick = () => {
-        this.props.getWeather(this.state.city);
-        this.setState({city: ''});
-    }
-
-    render() {
-        return (
-            <div>
-                <input type={'text'} name={'city'} placeholder={'Enter city'} onChange={this.handleChangeInput}
-                       value={this.state.city}/>
-                <button type={'submit'} onClick={this.handleClick}>Get weather</button>
-            </div>
-        );
-    }
-
-
+    return (
+        <div>
+            <input type={'text'} name={'city'} placeholder={'Enter city'}
+                   onChange={handleChangeInput} value={inputValue}/>
+            <button onClick={()=> {
+                dispatch(getWeatherAction(inputValue))
+            }}>Get weather</button>
+        </div>
+    );
 };
 
 export default Form;
