@@ -1,10 +1,10 @@
 import React from 'react';
-import Form from "./Form";
+import FormControl from "./FormControl";
 import Weather from "./Weather";
 const Data =() => {
         return (
             <div>
-                <Form/>
+                <FormControl/>
                 <Weather/>
             </div>
         );

@@ -1,7 +1,8 @@
-import {applyMiddleware, createStore} from "redux";
-import weatherReducer from "./reducer";
-import thunk from "redux-thunk";
-import {logger} from "redux-logger"
+import {configureStore} from "@reduxjs/toolkit";
+import weatherInfo from './slice/weatherSlice'
+import message from './slice/messageSlice'
 
-export const store = createStore(
-    weatherReducer, applyMiddleware(thunk, logger));
+export const store = configureStore(
+    {
+        reducer: {weatherInfo, message}
+    });
